@@ -1,0 +1,6 @@
+name: SkyWarsDivisions
+version: 1.0
+main: pl.trollcraft.SkyWarsDivisions.Main
+author: Pijok
+depend:
+  - PlaceholderAPI

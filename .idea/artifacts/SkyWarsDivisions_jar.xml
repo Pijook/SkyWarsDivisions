@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SkyWarsDivisions:jar">
+    <output-path>E:/Pluginy</output-path>
+    <root id="archive" name="SkyWarsDivisions.jar">
+      <element id="module-output" name="SkyWarsDivisions" />
+    </root>
+  </artifact>
+</component>
