@@ -1,14 +1,9 @@
 package pl.trollcraft.SkyWarsDivisions;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.clip.placeholderapi.PlaceholderHook;
-import me.wazup.skywars.PlaceholderAPIHooks;
-import me.wazup.skywars.PlayerData;
-import me.wazup.skywars.Skywars;
-import me.wazup.skywars.SkywarsAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.trollcraft.SkyWarsDivisions.listeners.EntityDeathListener;
 import pl.trollcraft.SkyWarsDivisions.listeners.JoinListener;
 import pl.trollcraft.SkyWarsDivisions.listeners.QuitListener;
 import pl.trollcraft.SkyWarsDivisions.playerDivision.PlayerDivision;
@@ -20,7 +15,6 @@ import java.util.HashMap;
 public class Main extends JavaPlugin {
 
     private static Main instance;
-    private static SkywarsAPI skywarsAPI;
 
     public static HashMap<Player, PlayerDivision> playersDivisions = new HashMap<Player, PlayerDivision>();
 
@@ -35,6 +29,7 @@ public class Main extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
         getServer().getPluginManager().registerEvents(new QuitListener(), this);
+        getServer().getPluginManager().registerEvents(new EntityDeathListener(), this);
         PlaceholderAPI.registerPlaceholderHook(this, new Placeholders());
 
         DivisionUtils.loadDivisions();
@@ -49,7 +44,4 @@ public class Main extends JavaPlugin {
         return instance;
     }
 
-    public static SkywarsAPI getSkywarsAPI() {
-        return skywarsAPI;
-    }
 }
