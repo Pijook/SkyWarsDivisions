@@ -10,7 +10,7 @@ import pl.trollcraft.SkyWarsDivisions.utils.DivisionUtils;
 
 public class PlayerDivision {
 
-    private Player player;
+    private final Player player;
     private Division current_division;
     private int points;
     private int kills;
@@ -21,12 +21,22 @@ public class PlayerDivision {
         this.current_division = current_division;
         this.points = points;
         this.kills = kills;
-        this.points = deaths;
+        this.deaths = deaths;
         countKDR();
     }
 
     public void countKDR(){
-        this.kdr = this.kills / this.deaths;
+        if(this.kills == 0 && this.deaths == 0){
+            this.kdr = 0;
+        }
+        else if(this.kills == 0){
+            this.kdr = 0;
+        }
+        else{
+            this.kdr = this.kills / this.deaths;
+        }
+        //this.kdr = 1;
+
     }
 
     public int getPoints() {

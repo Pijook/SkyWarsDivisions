@@ -40,6 +40,7 @@ public class ItemBuilder {
     public static ItemStack buildItem(Material material, int amount, String name, ArrayList<String> lore){
         ItemStack itemStack = new ItemStack(material, amount);
         ItemMeta meta = itemStack.getItemMeta();
+        name = ChatUtils.fixColor(name);
         meta.setDisplayName(name);
 
         ArrayList<String> lore_list = new ArrayList<String>();

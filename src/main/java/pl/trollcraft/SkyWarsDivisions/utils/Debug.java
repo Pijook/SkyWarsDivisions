@@ -6,7 +6,7 @@ import org.bukkit.command.ConsoleCommandSender;
 public class Debug {
 
     private static final ConsoleCommandSender console = Bukkit.getConsoleSender();
-    private static String prefix = "&aSkyWars &r";
+    private static String prefix = "&a[SkyWars] &r";
 
     public static void log(String a) {
         a = prefix + a;

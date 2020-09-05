@@ -2,9 +2,10 @@ name: SkyWarsDivisions
 version: 1.0
 main: pl.trollcraft.SkyWarsDivisions.Main
 author: Pijok
+api-version: 1.13
 depend:
   - PlaceholderAPI
 commands:
   division:
     usage: /division
-    aliases: [dywizja, ranga]
+    aliases: [dywizja, ranga, dywizje, rangi]

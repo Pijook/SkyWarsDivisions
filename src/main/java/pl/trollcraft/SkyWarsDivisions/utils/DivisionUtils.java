@@ -1,5 +1,6 @@
 package pl.trollcraft.SkyWarsDivisions.utils;
 
+import com.google.gson.internal.LinkedTreeMap;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import pl.trollcraft.SkyWarsDivisions.Main;
@@ -8,12 +9,13 @@ import pl.trollcraft.SkyWarsDivisions.playerDivision.PlayerDivision;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class DivisionUtils {
 
     private static File file = new File(Main.getInstance().getDataFolder(), "divisions.yml");
     private static YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
-    private static HashMap<Integer, Division> divisions = new HashMap<Integer, Division>();
+    private static LinkedTreeMap<Integer, Division> divisions = new LinkedTreeMap<Integer, Division>();
 
     public static void loadDivisions(){
 
@@ -33,14 +35,18 @@ public class DivisionUtils {
 
     public static Division findDivisionByPoints(int player_points){
 
-        Division temp_division = null;
-
+        Division temp_division;
+        Debug.log("Player points: " + player_points);
         for(int min_points : divisions.keySet()){
+            Debug.log("Min points: " + min_points);
+            temp_division = divisions.get(min_points);
             if(min_points < player_points){
-                temp_division = divisions.get(min_points);
+                Debug.log("Dywizja: " + temp_division.getName());
+                Debug.log("Gracz ma wiecej");
                 continue;
             }
             else{
+                Debug.log("Zwracam: " + temp_division.getName());
                 return temp_division;
             }
         }

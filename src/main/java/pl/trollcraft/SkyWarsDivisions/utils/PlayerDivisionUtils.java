@@ -20,7 +20,13 @@ public class PlayerDivisionUtils {
 
     public static void loadPlayer(Player player){
         if(!configuration.contains("players." + player.getName())){
-            Main.playersDivisions.put(player, new PlayerDivision(player, DivisionUtils.findDivisionByPoints(GlobalVariables.starting_points), GlobalVariables.starting_points, 0, 0));
+            Debug.log("Nie ma gracza w configu! Tworze nowego");
+            Main.playersDivisions.put(player, new PlayerDivision(player, DivisionUtils.findDivisionByPoints(100), 100, 0, 0));
+            Debug.log("Utworzono nowego gracza: ");
+            PlayerDivision playerDivision = Main.playersDivisions.get(player);
+            Debug.log("Punkty: " + playerDivision.getPoints());
+            Debug.log("KDR: " + playerDivision.getKdr());
+            Debug.log("Dywizja: " + playerDivision.getCurrent_division().getName());
             return;
         }
 
@@ -45,6 +51,11 @@ public class PlayerDivisionUtils {
 
     public static void savePlayer(Player player){
         PlayerDivision playerDivision = Main.playersDivisions.get(player);
+
+        Debug.log("Zapisuje gracza: " + player.getName());
+        Debug.log("Punkty: " + playerDivision.getPoints());
+        Debug.log("KDR: " + playerDivision.getKdr());
+        Debug.log("Dywizja: " + playerDivision.getCurrent_division().getName());
 
         configuration.set("players." + player.getName() + ".division_points", playerDivision.getPoints());
         configuration.set("players." + player.getName() + ".division_kills", playerDivision.getKills());
@@ -101,6 +112,9 @@ public class PlayerDivisionUtils {
         killerDivision.addPoints(killerPoints);
         deadDivision.removePoints(deadPoints);
 
+        ChatUtils.sendMessage(killer, GlobalVariables.get_points_text.replace("%points%", String.valueOf(killerPoints)));
+        ChatUtils.sendMessage(dead, GlobalVariables.lose_pooints_text.replace("%points%", String.valueOf(deadPoints)));
+
         killerDivision.addKill();
         killerDivision.countKDR();
         deadDivision.addDeath();
@@ -130,7 +144,7 @@ public class PlayerDivisionUtils {
         }
 
         ArrayList<String> lore = new ArrayList<String>();
-        lore.add("&7Obecna dywizja: " + playerDivision.getCurrent_division());
+        lore.add("&7Obecna dywizja: " + playerDivision.getCurrent_division().getName());
         lore.add("&7KDR: &c" + playerDivision.getKdr());
 
         ItemStack playerSkull = ItemBuilder.buildItem(GlobalVariables.division_gui_material, 1, "&a&l" + target.getName(), lore);
