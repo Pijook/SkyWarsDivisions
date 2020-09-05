@@ -5,11 +5,13 @@ public class Division {
     private String name;
     private int min_points;
     private int max_points;
+    private boolean broadcast;
 
-    public Division(String name, int min_points, int max_points){
+    public Division(String name, int min_points, int max_points, boolean broadcast){
         this.name = name;
         this.min_points = min_points;
         this.max_points = max_points;
+        this.broadcast = broadcast;
     }
 
     public String getName() {
@@ -34,5 +36,13 @@ public class Division {
 
     public void setMax_points(int max_points) {
         this.max_points = max_points;
+    }
+
+    public boolean isBroadcast() {
+        return broadcast;
+    }
+
+    public void setBroadcast(boolean broadcast) {
+        this.broadcast = broadcast;
     }
 }

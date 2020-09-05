@@ -1,5 +1,6 @@
 package pl.trollcraft.SkyWarsDivisions.playerDivision;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pl.trollcraft.SkyWarsDivisions.GlobalVariables;
 import pl.trollcraft.SkyWarsDivisions.division.Division;
@@ -72,7 +73,11 @@ public class PlayerDivision {
         this.points = points + amount;
         if(this.points > this.current_division.getMax_points()){
             this.current_division = DivisionUtils.findDivisionByPoints(this.points);
-            ChatUtils.sendMessage(this.player, "&aAwansujesz na range: " + this.current_division.getName());
+            ChatUtils.sendMessage(this.player, GlobalVariables.division_rankup_text.replace("%division%", current_division.getName()));
+
+            if(current_division.isBroadcast()){
+                ChatUtils.broadcast(GlobalVariables.global_division_rankup_text.replace("%player%", player.getName()).replace("%division%", current_division.getName()));
+            }
         }
     }
 
@@ -81,7 +86,7 @@ public class PlayerDivision {
 
         if(this.points < this.current_division.getMin_points()){
             this.current_division = DivisionUtils.findDivisionByPoints(this.points);
-            ChatUtils.sendMessage(this.player, "&cSpadles do rangi: " + this.current_division.getName());
+            ChatUtils.sendMessage(this.player, GlobalVariables.division_demote_text.replace("%division%", current_division.getName()));
         }
     }
 
@@ -95,5 +100,9 @@ public class PlayerDivision {
 
     public void addKill(){
         this.kills = kills + 1;
+    }
+
+    public void resetDeath(){
+
     }
 }

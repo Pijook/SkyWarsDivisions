@@ -1,6 +1,7 @@
 package pl.trollcraft.SkyWarsDivisions.utils;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import pl.trollcraft.SkyWarsDivisions.Main;
 import pl.trollcraft.SkyWarsDivisions.division.Division;
 import pl.trollcraft.SkyWarsDivisions.playerDivision.PlayerDivision;
@@ -24,8 +25,9 @@ public class DivisionUtils {
             String division_name = configuration.getString("divisions." + key + ".name");
             int min_points = configuration.getInt("divisions." + key + ".min_points");
             int max_points = configuration.getInt("divisions." + key + ".max_points");
+            boolean broadcast = configuration.getBoolean("divisions." + key + ".announce");
 
-            divisions.put(min_points, new Division(division_name, min_points, max_points));
+            divisions.put(min_points, new Division(division_name, min_points, max_points, broadcast));
         }
     }
 
@@ -50,6 +52,17 @@ public class DivisionUtils {
     public static void setPlayerDivisionByPoints(PlayerDivision playerDivision){
         Division division = findDivisionByPoints(playerDivision.getPoints());
         playerDivision.setCurrent_division(division);
+    }
+
+    public static void showDivisionList(Player player){
+        ChatUtils.sendMessage(player, "&7--------------");
+        for(int key : divisions.keySet()){
+            Division division = divisions.get(key);
+            ChatUtils.sendMessage(player, "&7Nazwa: " + division.getName());
+            ChatUtils.sendMessage(player, "&7Min Punktow: &c" + division.getMin_points());
+            ChatUtils.sendMessage(player, "&7Max Punktow: &c" + division.getMax_points());
+            ChatUtils.sendMessage(player, "&7--------------");
+        }
     }
 
 }

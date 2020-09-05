@@ -4,3 +4,7 @@ main: pl.trollcraft.SkyWarsDivisions.Main
 author: Pijok
 depend:
   - PlaceholderAPI
+commands:
+  division:
+    usage: /division
+    aliases: [dywizja, ranga]

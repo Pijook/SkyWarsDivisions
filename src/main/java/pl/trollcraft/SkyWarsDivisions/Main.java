@@ -3,6 +3,7 @@ package pl.trollcraft.SkyWarsDivisions;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.trollcraft.SkyWarsDivisions.commands.DivisionCommand;
 import pl.trollcraft.SkyWarsDivisions.listeners.EntityDeathListener;
 import pl.trollcraft.SkyWarsDivisions.listeners.JoinListener;
 import pl.trollcraft.SkyWarsDivisions.listeners.QuitListener;
@@ -31,6 +32,8 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new QuitListener(), this);
         getServer().getPluginManager().registerEvents(new EntityDeathListener(), this);
         PlaceholderAPI.registerPlaceholderHook(this, new Placeholders());
+
+        getCommand("division").setExecutor(new DivisionCommand());
 
         DivisionUtils.loadDivisions();
     }
